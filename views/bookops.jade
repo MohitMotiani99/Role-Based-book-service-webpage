@@ -1,0 +1,89 @@
+html 
+    head 
+        title Book OPS 
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css") 
+        script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js") 
+    body 
+        div.container-fluid
+            div.jumbotron(style="padding:10px;background-color:black;color:white")
+                h1 Books Service Ops
+                form.form-group.float-right(action="/logout",method='GET')
+                    input.btn.btn-primary.float-right(type="submit",value="Logout")
+
+            div.row
+                div.card.col-sm-6
+                    div.card-header
+                        h1 Current Books
+                    table.table.table-striped
+                        thead.thead-dark
+                            tr
+                                th Book Name 
+                                th  Price 
+                                th  Author 
+                        tbody 
+                            each b in bookresult
+                                tr 
+                                    th=b.bookname 
+                                    th=b.price 
+                                    th=b.author
+                
+                div.card.col-sm-6
+                    div.card-header
+                        h1 Add Books 
+                    form(action="/bookstore/add",method='POST').form-group 
+                        label(for="bookname") Enter Book Name: 
+                        input(type="text",name='bookname',id='bookname').form-control
+                        br
+                        label(for="price") Enter Book Price: 
+                        input.form-control(type="text",name='price',id='price')
+                        br
+                        label(for="author") Enter Book Author: 
+                        input.form-control(type="text",name='author',id='author')
+                        br
+                        input.form-control(type="text",name='token_secret' value=JSON.stringify(curr_user) style="visibility:hidden")
+                        input.btn.btn-primary(type="submit",value='Add Book')
+            
+            div.row
+                div.card.col-sm-4
+                    div.card-header
+                        h1 Remove Books 
+                    form.form-group(action="/bookstore/rembookName",method='POST') 
+                        label(for="bookname_del") Enter Book Name: 
+                        input.form-control(type="text",name='bookname',id='bookname_del')
+                        br
+                        input.form-control(type="text",name='token_secret' value=JSON.stringify(curr_user) style="visibility:hidden")
+                        input.btn.btn-primary(type="submit",value='Remove Book')
+                
+                div.card.col-sm-4
+                    div.card-header
+                        h1 Update Book Prices(Admin locked)
+                    form.form-group(action="/bookstore/updbookPrice",method='POST') 
+                        label(for="bookname_upd") Enter Book Name: 
+                        input.form-control(type="text",name='bookname',id='bookname_upd')
+                        br
+                        label(for="price_upd") Enter New Price: 
+                        input.form-control(type="text",name='price',id='price_upd')
+                        br
+                        input.form-control(type="text",name='token_secret' value=JSON.stringify(curr_user) style="visibility:hidden")
+                        input.btn.btn-primary(type="submit",value='Update Book')
+                
+                div.card.col-sm-4
+                    div.card-header
+                        h1 Update Book Authors 
+                    form.form-group(action="/bookstore/updbookAuthor",method='POST') 
+                        label(for="bookname_upd_2") Enter Book Name: 
+                        input.form-control(type="text",name='bookname',id='bookname_upd_2')
+                        br
+                        label(for="author_upd") Enter New Author name: 
+                        input.form-control(type="text",name='author',id='author_upd')
+                        br
+                        input.form-control(type="text",name='token_secret' value=JSON.stringify(curr_user) style="visibility:hidden")
+                        input.btn.btn-primary(type="submit",value='Update Book')
+
+
+            
+            
+            //- h3=curr_user.token+'      '+curr_user.secret
+            

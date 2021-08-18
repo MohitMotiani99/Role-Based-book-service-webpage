@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
+	<script>
+		// function login(){
+		// 	document.getElementById('form1').submit()
+		
+		// // var username=document.getElementById('username').value
+		// // 	var password=document.getElementById('password').value
+
+		// 	//console.log(username+ " "+password)
+
+			var xhttp = new XMLHttpRequest()
+			if(xhttp){
+				xhttp.onload=function(){
+					let ans = xhttp.responseText
+					// if(ans.indexOf('Record Inserted')==0)
+					// 	document.getElementById('reg').innerHTML='Record Inserted'
+					console.log(ans)
+					console.log("Logged In")
+				}
+				// xhttp.open('POST','/login')
+				// xhttp.send({
+				// 	'username':username,
+				// 	'password':password
+				// })
+			}
+
+
+		// 	//document.getElementById('form1').submit()
+		// }
+		function formsub(ele){
+			var form = document.getElementById('form1')
+			if(ele.value=='Login'){
+				form.setAttribute('action','/login')
+				form.submit()
+			}
+			else{
+				form.setAttribute('action','/register')
+				form.submit()
+			}
+		}
+	</script>
+	
+	<meta charset="utf-8">
+	<title>Login</title>
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Login/Register to Proceed</h1>
+		</div>
+		<div class="card">
+			<div class="card-body">
+				<form method="POST" action="/login" id="form1">
+					<div class="form-group">
+						<label for="username">Enter Username</label>
+						<input type="text" name="username" id="username" class="form-control">
+					</div>
+					<div >
+						<label for="password">Enter Paassword:</label>
+						<input type="password" name="password" id="password" class="form-control">
+					</div>
+					<div >
+						<label for="role">Enter Role(admin/user):</label>
+						<input type="text" name="role" id="role" class="form-control">
+					</div>
+					<br>
+					<br>
+					<input type="button" value="Login" class="btn btn-primary" style="margin-right: 20px;" onclick="formsub(this)">
+					<!-- <input type="button" value="Login" class="btn btn-primary" style="margin-right: 20px;" onclick="login()"> -->
+					<input type="button" value="Register" class="btn btn-primary" onclick="formsub(this)">
+				</form>
+				<p id="reg" style="display: none;"></p>
+				<p id="log" style="display:none;"></p>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
